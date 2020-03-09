@@ -1,0 +1,55 @@
+{
+  "name": "memory-kv",
+  "version": "0.0.1",
+  "description": "Node in Memory Key Value Store similar to Redis",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "scripts": {
+    "test": "jest --config jestconfig.json",
+    "dev-test": "jest --config jestconfig.json --watch",
+    "build": "tsc",
+    "format": "prettier --write \"src/**/*.ts\" \"src/**/*.js\"",
+    "lint": "tslint -p tsconfig.json",
+    "prepare": "npm run build",
+    "prepublishOnly": "npm test && npm run lint",
+    "preversion": "npm run lint",
+    "version": "npm run format && git add -A src",
+    "postversion": "git push && git push --tags"
+  },
+  "files": [
+    "lib/**/*"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tharindu96/node-mem-kv.git"
+  },
+  "author": "Tharindu Hasthika",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/tharindu96/node-mem-kv/issues"
+  },
+  "homepage": "https://github.com/tharindu96/node-mem-kv#readme",
+  "devDependencies": {
+    "@types/fs-extra": "^8.1.0",
+    "@types/jest": "^24.9.1",
+    "@types/micromatch": "^4.0.1",
+    "@types/node": "^12.12.29",
+    "jest": "^25.1.0",
+    "prettier": "^1.18.2",
+    "ts-jest": "^25.1.0",
+    "tslint": "^5.18.0",
+    "tslint-config-prettier": "^1.18.0",
+    "typescript": "^3.8.3"
+  },
+  "dependencies": {
+    "micromatch": "^4.0.2"
+  },
+  "keywords": [
+    "key",
+    "value",
+    "store",
+    "database",
+    "memory",
+    "kv"
+  ]
+}
