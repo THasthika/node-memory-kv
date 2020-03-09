@@ -1,2 +1,2 @@
-export * from './IMemCache'
-export * from './MemCache'
+export * from './IMemCache';
+export * from './MemCache';
