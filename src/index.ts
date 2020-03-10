@@ -1,2 +1,3 @@
-export * from './IMemCache';
-export * from './MemCache';
+import MemoryKV from "./MemoryKV";
+
+export default MemoryKV;

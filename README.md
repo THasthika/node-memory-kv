@@ -4,16 +4,31 @@ An in memory key value store. Tries to emulate Redis inside node itself.
 
 Mainly useful for development purposes.
 
+## Useage
 
+- Typescript
 ```ts
-const cache = new MemCache();
-await cache.set('key1', 'value')
+import MemoryKV from 'memory-kv'
 
-const val = await cache.get('key1')
+const cache = new MemoryKV();
+await cache.set('key1', 'value');
+
+const val = await cache.get('key1');
 // val == 'value'
 ```
 
-# Features
+- Javascript
+```js
+const MemoryKV = require('memory-kv');
+
+const cache = new MemoryKV();
+await cache.set('key1', 'value');
+
+const val = await cache.get('key1');
+// val == 'value'
+```
+
+## Features
 
 - [x] Setup a TTL feature
 - [x] Set a value with a key

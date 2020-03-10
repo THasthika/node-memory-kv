@@ -1,6 +1,6 @@
 {
   "name": "memory-kv",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Node in Memory Key Value Store similar to Redis",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
@@ -21,14 +21,14 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/tharindu96/node-mem-kv.git"
+    "url": "git+https://github.com/tharindu96/node-memory-kv.git"
   },
   "author": "Tharindu Hasthika",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/tharindu96/node-mem-kv/issues"
+    "url": "https://github.com/tharindu96/node-memory-kv/issues"
   },
-  "homepage": "https://github.com/tharindu96/node-mem-kv#readme",
+  "homepage": "https://github.com/tharindu96/node-memory-kv#readme",
   "devDependencies": {
     "@types/fs-extra": "^8.1.0",
     "@types/jest": "^24.9.1",
