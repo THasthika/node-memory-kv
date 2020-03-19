@@ -1,6 +1,6 @@
 {
   "name": "memory-kv",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Node in Memory Key Value Store similar to Redis",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
@@ -33,7 +33,7 @@
     "@types/fs-extra": "^8.1.0",
     "@types/jest": "^24.9.1",
     "@types/micromatch": "^4.0.1",
-    "@types/node": "^12.12.29",
+    "@types/node": "^12.12.30",
     "jest": "^25.1.0",
     "prettier": "^1.18.2",
     "ts-jest": "^25.1.0",
