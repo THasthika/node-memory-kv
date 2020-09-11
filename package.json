@@ -1,6 +1,6 @@
 {
   "name": "memory-kv",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Node in Memory Key Value Store similar to Redis",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
