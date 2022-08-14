@@ -1,17 +1,17 @@
 import { match } from 'micromatch';
 
 interface IMemoryKV {
-  set(key: string, value: string, ttl?: number): Promise<boolean>;
-  get(key: string): Promise<string | null>;
-  keys(pattern: string): Promise<string[]>;
-  del(...keys: string[]): Promise<boolean>;
-  ttl(key: string): Promise<number>;
-  incr(key: string): Promise<number>;
+  set: (key: string, value: string, ttl?: number) => Promise<boolean>;
+  get: (key: string) => Promise<string | null>;
+  keys: (pattern: string) => Promise<string[]>;
+  del: (...keys: string[]) => Promise<boolean>;
+  ttl: (key: string) => Promise<number>;
+  incr: (key: string) => Promise<number>;
 }
 
 export default class MemoryKV implements IMemoryKV {
   private data: { [key: string]: string } = {};
-  private ttls: Array<{ key: string; ttl: number }> = [];
+  private readonly ttls: Array<{ key: string; ttl: number }> = [];
   private timeout: { handler?: NodeJS.Timeout; time?: number } = {
     handler: undefined,
     time: undefined,
@@ -20,7 +20,7 @@ export default class MemoryKV implements IMemoryKV {
   public async set(key: string, value: string, ttl?: number | undefined): Promise<boolean> {
     this.removeKey(key);
     this.data[key] = value;
-    if (!!ttl) {
+    if (ttl != null) {
       this.addTTL(key, ttl);
     }
     return true;
@@ -39,7 +39,7 @@ export default class MemoryKV implements IMemoryKV {
   }
 
   public async del(...keys: string[]): Promise<boolean> {
-    keys.forEach(key => {
+    keys.forEach((key) => {
       this.removeKey(key);
     });
     return true;
@@ -71,11 +71,11 @@ export default class MemoryKV implements IMemoryKV {
     return n;
   }
 
-  private addTTL(key: string, ttl: number) {
+  private addTTL(key: string, ttl: number): void {
     const nextTime = Date.now() + ttl * 1000;
-    if (!this.timeout.time || nextTime < this.timeout.time!!) {
-      if (!!this.timeout.handler) {
-        clearTimeout(this.timeout.handler!!);
+    if (this.timeout.time == null || nextTime < this.timeout.time) {
+      if (this.timeout.handler != null) {
+        clearTimeout(this.timeout.handler);
       }
       this.timeout.handler = setTimeout(this.timeoutHandler(this), nextTime - Date.now());
       this.timeout.time = nextTime;
@@ -89,7 +89,8 @@ export default class MemoryKV implements IMemoryKV {
     });
   }
 
-  private removeKey(key: string) {
+  private removeKey(key: string): void {
+    // eslint-disable-next-line @typescript-eslint/no-dynamic-delete
     delete this.data[key];
     for (let i = 0; i < this.ttls.length; i++) {
       if (this.ttls[i].key === key) {
@@ -107,7 +108,7 @@ export default class MemoryKV implements IMemoryKV {
       }
       do {
         ttl = that.ttls.shift();
-        if (!ttl) {
+        if (ttl == null) {
           that.timeout.handler = undefined;
           that.timeout.time = undefined;
           break;
@@ -120,6 +121,7 @@ export default class MemoryKV implements IMemoryKV {
           that.ttls.unshift(ttl);
           break;
         }
+        // eslint-disable-next-line @typescript-eslint/no-dynamic-delete
         delete that.data[ttl.key];
       } while (ttl !== undefined);
     };
